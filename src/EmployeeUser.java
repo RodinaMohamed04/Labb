@@ -11,16 +11,11 @@ public class EmployeeUser {
     private String phoneNumber;
 
     public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
-       /*this.employeeId = employeeId; // Unique identifier for the employee
+      this.employeeId = employeeId; // Unique identifier for the employee
         this.name = name;
         this.email = email;
         this.address = address;
-        this.phoneNumber = phoneNumber;*/
-        setEmployeeId(employeeId);
-        setName(name);
-        setEmail(email);
-        setAddress(address);
-        setPhoneNumber(phoneNumber);
+        this.phoneNumber = phoneNumber;
     }
 
     // Getters and Setters
@@ -69,7 +64,9 @@ public class EmployeeUser {
     }
 
     //method 2 returns a string employee ID
-    public String getSearchKey(){
+    public String getSearchKey() {
+
         return employeeId;  //unique Id for each employee
-    }
+}
+
 }
