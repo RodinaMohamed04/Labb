@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+//represent an employee's personal information
 public class EmployeeUser {
     private String employeeId;
     private String name;
@@ -6,11 +11,16 @@ public class EmployeeUser {
     private String phoneNumber;
 
     public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
-        this.employeeId = employeeId; // Unique identifier for the employee
+       /*this.employeeId = employeeId; // Unique identifier for the employee
         this.name = name;
         this.email = email;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;*/
+        setEmployeeId(employeeId);
+        setName(name);
+        setEmail(email);
+        setAddress(address);
+        setPhoneNumber(phoneNumber);
     }
 
     // Getters and Setters
