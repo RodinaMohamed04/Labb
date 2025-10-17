@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 //represent an employee's personal information
 public class EmployeeUser {
     private String employeeId;
@@ -11,11 +7,16 @@ public class EmployeeUser {
     private String phoneNumber;
 
     public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
-      this.employeeId = employeeId; // Unique identifier for the employee
+      /*this.employeeId = employeeId; // Unique identifier for the employee
         this.name = name;
         this.email = email;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;*/
+        setEmployeeId(employeeId);
+        setName(name);
+        setEmail(email);
+        setAddress(address);
+        setPhoneNumber(phoneNumber);
     }
 
     // Getters and Setters
@@ -41,6 +42,9 @@ public class EmployeeUser {
     }
 
     public void setEmail(String email) {
+        if(!email.contains("@")||!email.contains(".")) {
+            throw new IllegalArgumentException("Invalid email address: " + email);
+        }
         this.email = email;
     }
 
@@ -51,6 +55,9 @@ public class EmployeeUser {
         this.address = address;
     }
     public String getPhoneNumber() {
+        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
         return phoneNumber;
     }
     public void setPhoneNumber(String phoneNumber) {
@@ -60,13 +67,12 @@ public class EmployeeUser {
     // Additional methods specific to EmployeeUser can be added here
     //method 1  returns the data of the employee comma separated
     public String lineRepresentation() {
-        return employeeId + "," + name + "," + email + "," + address + "," + phoneNumber;
+        return getEmployeeId()+ "," + getName() + "," + getEmail() + "," + getAddress() + "," + getPhoneNumber();
     }
 
     //method 2 returns a string employee ID
     public String getSearchKey() {
-
-        return employeeId;  //unique Id for each employee
-}
+        return getEmployeeId();  //unique Id for each employee
+   }
 
 }
