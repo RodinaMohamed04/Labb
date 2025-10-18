@@ -21,13 +21,14 @@ public class CustomerProduct {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // Getters and Setters
+    //method 1 ---> get and set customerSSN
     public String getCustomerSSN() {
         return customerSSN;
     }
     public void setCustomerSSN(String customerSSN) {
         this.customerSSN = customerSSN;
     }
-
+    //method 2 ---> get and set productID
     public String getProductID() {
         return productID;
     }
@@ -41,7 +42,7 @@ public class CustomerProduct {
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-
+    //method 5 ---> update paid status
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
@@ -49,19 +50,17 @@ public class CustomerProduct {
     public boolean getPaid() {
         return paid;
     }
-
+    //method 3 ---> returns the data of the customer product comma separated
     public String lineRepresentation(){
          return getCustomerSSN() + "," + getProductID() + "," + getPurchaseDate().format(formatter) + "," + getPaid();
     }
+
+    //method 4 ---> check if the product is paid
     public boolean isPaid(){
-        if(paid){
-            return true;
-        } else {
-            return false;
-        }
+        return paid;
     }
 
-
+    //method 6 ---> returns a string key composed of customerSSN, productID, and purchaseDate
     public String getSearchKey(){
         return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
     }
