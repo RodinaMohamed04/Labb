@@ -1,5 +1,3 @@
-//package lab4;
-
 public class Product {
 
     private String productID;
@@ -56,5 +54,22 @@ public class Product {
     public String getSearchKey() {
         return getProductID();
     }
+ /*public static void main(String[] args) {
+        Product p = new Product("P1001","Laptop","Apple","Tradeline",10,1500.0f);
+       
 
+        System.out.println("ID: " + p.getProductID());
+        System.out.println("Name: " + p.getProductName());
+        System.out.println("Quantity: " + p.getQuantity());
+        System.out.println("Line Representation: " + p.lineRepresentation());
+
+        // simulate selling 1 product
+        p.setQuantity(p.getQuantity() - 1);
+        System.out.println("After selling one: " + p.getQuantity());}*/
+    
+
+    
 }
+
+    
+
