@@ -75,7 +75,7 @@ public class CustomerProductDatabase {
     }
     //method 3 ---> return all records
     public ArrayList<CustomerProduct> returnAllRecords(){
-       return records;
+        return records;
     }
 
     //method 4 ---> check if a record with the given key exists
@@ -130,7 +130,7 @@ public class CustomerProductDatabase {
             saveToFile();
         } else {
             throw new IllegalArgumentException("Record with key" + key + " not found.");
-      }
+        }
     }
     //method 8 ---> save all records to file
     public void saveToFile(){
