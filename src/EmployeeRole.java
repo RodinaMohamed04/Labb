@@ -24,7 +24,7 @@ public class EmployeeRole {
 
     // method--->1  to add a new product in file products.txt
     /***ana hena zawt parameter float price et2kedo hya f3ln hya mansya wla la2***/
-    public void addProduct(String productID, String productName, String manufacturerName,
+    /*public void addProduct(String productID, String productName, String manufacturerName,
                            String supplierName, int quantity,float price) throws IOException {
         if (productsDatabase.getRecord(productID) != null) {
             message("Warning:", "Product already exists!");
@@ -35,6 +35,16 @@ public class EmployeeRole {
         productsDatabase.insertRecord(p);
         productsDatabase.saveToFile();
         message("Success:", "Product added successfully!");
+    }*/
+    public void addProduct(String productID, String productName, String manufacturerName,
+                           String supplierName, int quantity) throws IOException {
+
+        float defultprice = 0.0f; // Set a default price value
+        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, defultprice);
+        productsDatabase.insertRecord(p);
+        productsDatabase.saveToFile();
+        message("Success:", "Product added successfully!");
+
     }
     // method--->2 to get list of all products in the file products.txt
     public Product[] getListOfProducts() throws IOException {
