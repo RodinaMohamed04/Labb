@@ -1,5 +1,7 @@
 //represent an employee's personal information
-public class EmployeeUser {
+
+public class EmployeeUser implements Record {
+
     private String employeeId;
     private String name;
     private String email;
@@ -7,11 +9,7 @@ public class EmployeeUser {
     private String phoneNumber;
 
     public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
-      /*this.employeeId = employeeId; // Unique identifier for the employee
-        this.name = name;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;*/
+
         setEmployeeId(employeeId);
         setName(name);
         setEmail(email);
@@ -42,8 +40,8 @@ public class EmployeeUser {
     }
 
     public void setEmail(String email) {
-        if(!email.contains("@")||!email.contains(".")) {
-            throw new IllegalArgumentException("Invalid email address: " + email);
+        if (!email.contains("@") || !email.contains(".")) {
+
         }
         this.email = email;
     }
@@ -51,41 +49,33 @@ public class EmployeeUser {
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber == null || !phoneNumber.matches("\\d{10}")) {
-            throw new IllegalArgumentException("Invalid phone number");
+        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
+
         }
         this.phoneNumber = phoneNumber.trim();
-       /* if (phoneNumber == null) {
-            throw new IllegalArgumentException("Phone number cannot be null");
-        }
-        phoneNumber = phoneNumber.trim();
-        if (phoneNumber.matches("(\\+20|0)1\\d{9}")) {
-          this.phoneNumber = phoneNumber;
-        }
-        else if (phoneNumber.matches("1\\d{9}"))
-        {
-            this.phoneNumber = "+20" + phoneNumber;
-        }
-        else
-            throw  new IllegalArgumentException("Invalid Egyptian mobile number");*/
+
     }
 
-    // Additional methods specific to EmployeeUser can be added here
     //method 1  returns the data of the employee comma separated
+    @Override
     public String lineRepresentation() {
-        return getEmployeeId()+ "," + getName() + "," + getEmail() + "," + getAddress() + "," + getPhoneNumber();
+        return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getAddress() + "," + getPhoneNumber();
     }
 
     //method 2 returns a string employee ID
+    @Override
     public String getSearchKey() {
         return getEmployeeId();  //unique Id for each employee
-   }
+    }
 
 }
