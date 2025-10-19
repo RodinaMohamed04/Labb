@@ -1,19 +1,21 @@
 //the role of the admin
+
 import java.util.ArrayList;
 
 public class AdminRole {
 
-    private EmployeeUserDatabase database; 
+    private EmployeeUserDatabase database;
 
     // creates the database object and read employees from file
     public AdminRole() {
         database = new EmployeeUserDatabase("Employees");
         try {
-            database.readFromFile(); 
+            database.readFromFile();
         } catch (Exception e) {
             System.out.println("Error reading file."); // show error if file not found or empty
         }
     }
+
     // method 1: add a new employee
     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
         EmployeeUser newEmp = new EmployeeUser(employeeId, name, email, address, phoneNumber);
@@ -23,7 +25,11 @@ public class AdminRole {
 
     // method 2: get list of all employees in the file
     public EmployeeUser[] getListOfEmployees() {
-        ArrayList<EmployeeUser> list = database.returnAllRecords();  // get all employees from the database (ArrayList)
+        ArrayList<Record> hold = database.returnAllRecords();  // get all employees from the database (ArrayList)
+        ArrayList<EmployeeUser> list = new ArrayList<>();
+        for (Record r : hold) {
+            list.add((EmployeeUser) r);  //casting from record(parent) to EmployeeUser
+        }
         EmployeeUser[] array = new EmployeeUser[list.size()];
         array = list.toArray(array); // convert ArrayList to array
         return array;
@@ -39,7 +45,7 @@ public class AdminRole {
     // method 4: save all changes to file (logout)
     public void logout() {
         try {
-            database.saveToFile(); 
+            database.saveToFile();
             System.out.println("All data saved successfully. Logging out...");
         } catch (Exception e) {
             System.out.println("Error saving data to file.");
