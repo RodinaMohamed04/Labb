@@ -16,7 +16,7 @@ public class ProductDatabase {
     }
     //method 1 ---> read product data from file and store in records
     public void readFromFile() throws IOException {
-
+        records.clear();
         File file = new File(filename + ".txt");
         if (!file.exists()) {
             throw new IOException("File not found: " + filename);
@@ -68,7 +68,7 @@ public class ProductDatabase {
             records.add(record);
             saveToFile();
         } else {
-            throw new IllegalArgumentException("Record with the same Employee ID already exists." + record.getSearchKey());
+            throw new IllegalArgumentException("Record with the same Product ID already exists." + record.getSearchKey());
         }
     }
     //method 7 ---> delete a record by key

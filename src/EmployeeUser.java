@@ -58,10 +58,23 @@ public class EmployeeUser {
         return phoneNumber;
     }
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
+        if (phoneNumber == null || !phoneNumber.matches("\\d{10}")) {
             throw new IllegalArgumentException("Invalid phone number");
         }
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber.trim();
+       /* if (phoneNumber == null) {
+            throw new IllegalArgumentException("Phone number cannot be null");
+        }
+        phoneNumber = phoneNumber.trim();
+        if (phoneNumber.matches("(\\+20|0)1\\d{9}")) {
+          this.phoneNumber = phoneNumber;
+        }
+        else if (phoneNumber.matches("1\\d{9}"))
+        {
+            this.phoneNumber = "+20" + phoneNumber;
+        }
+        else
+            throw  new IllegalArgumentException("Invalid Egyptian mobile number");*/
     }
 
     // Additional methods specific to EmployeeUser can be added here

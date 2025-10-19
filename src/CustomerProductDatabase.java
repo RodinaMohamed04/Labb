@@ -38,8 +38,8 @@ public class CustomerProductDatabase {
 
     //method 1 ---> read customer product data from file and store in records
     public void readFromFile() throws IOException {
-        /*records.clear();
-        try {
+        records.clear();
+        /*try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
             String line;
             while((line = br.readLine())!= null) {
@@ -75,7 +75,7 @@ public class CustomerProductDatabase {
     }
     //method 3 ---> return all records
     public ArrayList<CustomerProduct> returnAllRecords(){
-        return records;
+        return new ArrayList<>(records);
     }
 
     //method 4 ---> check if a record with the given key exists

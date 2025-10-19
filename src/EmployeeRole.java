@@ -31,7 +31,7 @@ public class EmployeeRole {
             return;
         }
 
-        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, 0.0F);
+        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
         productsDatabase.insertRecord(p);
         productsDatabase.saveToFile();
         message("Success:", "Product added successfully!");
