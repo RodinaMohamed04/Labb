@@ -5,32 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProductDatabase {
+public class ProductDatabase extends Database{
 
-    private ArrayList<Product> records;
-    private String filename;
 
     public ProductDatabase(String filename) {
-        this.records = new ArrayList<>();
-        this.filename = filename;
+      super(filename);
     }
-    //method 1 ---> read product data from file and store in records
-    public void readFromFile() throws IOException {
-        records.clear();
-        File file = new File(filename + ".txt");
-        if (!file.exists()) {
-            throw new IOException("File not found: " + filename);
-        }
-        try (Scanner scan = new Scanner(new FileReader(file))) {
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                Product product = createRecordFrom(line);
-                records.add(product);
-            }
-        }
-
-    }
+   
     //method to create Product object from a line in the file
+    @Override
     public Product createRecordFrom(String line) {
         String[] parts = line.split(",");
         if (parts.length != 6) {
@@ -40,102 +23,4 @@ public class ProductDatabase {
         float price = Float.parseFloat(parts[5]);
         return new Product(parts[0], parts[1], parts[2], parts[3], quantity, price);
     }
-    //method 3 ---> return all records
-    public ArrayList<Product> returnAllRecords() {
-        return new ArrayList<>(records);
-    }
-    //method 4 ---> check if a record with the given key exists
-    public boolean contains(String key) {
-        for (Product product : records) {
-            if (product.getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //method 5 ---> get a record by key
-    public Product getRecord(String key) {
-        for (Product product : records) {
-            if (product.getSearchKey().equals(key)) {
-                return product;
-            }
-        }
-        return null;
-    }
-    //method 6 ---> insert a new record
-    public void insertRecord(Product record) {
-        if (!contains(record.getSearchKey())) {
-            records.add(record);
-            saveToFile();
-        } else {
-            throw new IllegalArgumentException("Record with the same Product ID already exists." + record.getSearchKey());
-        }
-    }
-    //method 7 ---> delete a record by key
-    public void deleteRecord(String key) {
-        Product remove = null;
-        for (Product product : records) {
-            if (product.getSearchKey().equals(key)) {
-                remove = product;
-                break;
-            }
-        }
-        if (remove != null) {
-            records.remove(remove);
-            saveToFile();
-        } else {
-            throw new IllegalArgumentException("Record with Employee ID " + key + " not found.");
-        }
-
-    }
-    //method 8 ---> save records to file
-    public void saveToFile() {
-
-        try (java.io.FileWriter fileWriter = new java.io.FileWriter(filename + ".txt")) {
-            for (Product product : records) {
-                fileWriter.write(product.lineRepresentation() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /*public static void main(String[] args) {
-        ProductDatabase db = new ProductDatabase("Products");
-        try {
-            db.readFromFile();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        System.out.println("--Existing Products--");
-        for(Product prod : db.returnAllRecords()){
-            System.out.println(prod.lineRepresentation());
-        }
-        Product newProduct = new Product ("P999","Tablet","Huawei","MobileHub",20,600.0f);
-        if(!db.contains(newProduct.getSearchKey())){
-            db.insertRecord(newProduct);
-            System.out.println("new prod inserted:"+ newProduct.getProductID());
-        }
-        else{
-           System.out.println("prod already exists:"+ newProduct.getProductID()); 
-        }
-        String searchID = "P8742";
-        Product found = db.getRecord(searchID);
-        if(found !=null)
-            System.out.println("Product found "+ found.lineRepresentation());
-        else System.out.println("Product not fount"+ searchID);
-        String deleteID= "P1259";
-        try {
-            db.deleteRecord(deleteID);
-            System.out.println("prod deleted"+deleteID );
-        }
-        catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-         System.out.println("--Products After Changes--");
-        for(Product prod : db.returnAllRecords()){
-            System.out.println(prod.lineRepresentation());
-        }
-    }*/
 }
