@@ -23,8 +23,9 @@ public class EmployeeRole {
     }
 
     // method--->1  to add a new product in file products.txt
+    /***ana hena zawt parameter float price et2kedo hya f3ln hya mansya wla la2***/
     public void addProduct(String productID, String productName, String manufacturerName,
-                           String supplierName, int quantity) {
+                           String supplierName, int quantity,float price) throws IOException {
         if (productsDatabase.getRecord(productID) != null) {
             message("Warning:", "Product already exists!");
             return;
