@@ -1,4 +1,5 @@
-public class Product {
+
+public class Product implements Record {
 
     private String productID;
     private String productName;
@@ -42,34 +43,18 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        ////////law take 1 >>-1///law return 1>>+1///lw n==0>>sold out
-       
+
         this.quantity = quantity;
     }
 
+    @Override
     public String lineRepresentation() {
         return getProductID() + "," + getProductName() + "," + getManufacturerName() + "," + getSupplierName() + "," + getQuantity() + "," + getPrice();
     }
 
+    @Override
     public String getSearchKey() {
         return getProductID();
     }
- /*public static void main(String[] args) {
-        Product p = new Product("P1001","Laptop","Apple","Tradeline",10,1500.0f);
-       
 
-        System.out.println("ID: " + p.getProductID());
-        System.out.println("Name: " + p.getProductName());
-        System.out.println("Quantity: " + p.getQuantity());
-        System.out.println("Line Representation: " + p.lineRepresentation());
-
-        // simulate selling 1 product
-        p.setQuantity(p.getQuantity() - 1);
-        System.out.println("After selling one: " + p.getQuantity());}*/
-    
-
-    
 }
-
-    
-
