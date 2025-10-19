@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -18,26 +19,11 @@ public class EmployeeRole {
         } catch (Exception e) {
             message("Error:", "Failed to read databases: " + e.getMessage());
         }
-       // productsDatabase.readFromFile();
-       // customerProductDatabase.readFromFile();
+
     }
 
-    // method--->1  to add a new product in file products.txt
-    /***ana hena zawt parameter float price et2kedo hya f3ln hya mansya wla la2***/
-    /*public void addProduct(String productID, String productName, String manufacturerName,
-                           String supplierName, int quantity,float price) throws IOException {
-        if (productsDatabase.getRecord(productID) != null) {
-            message("Warning:", "Product already exists!");
-            return;
-        }
-
-        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
-        productsDatabase.insertRecord(p);
-        productsDatabase.saveToFile();
-        message("Success:", "Product added successfully!");
-    }*/
     public void addProduct(String productID, String productName, String manufacturerName,
-                           String supplierName, int quantity) throws IOException {
+            String supplierName, int quantity) throws IOException {
 
         float defultprice = 0.0f; // Set a default price value
         Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, defultprice);
@@ -46,25 +32,37 @@ public class EmployeeRole {
         message("Success:", "Product added successfully!");
 
     }
+
     // method--->2 to get list of all products in the file products.txt
     public Product[] getListOfProducts() throws IOException {
         productsDatabase.readFromFile();
-        ArrayList<Product> all = productsDatabase.returnAllRecords();
-        return all.toArray(new Product[0]);
+        ArrayList<Record> hold = productsDatabase.returnAllRecords();
+        ArrayList<Product> list = new ArrayList<>();
+        for (Record r : hold) {
+            list.add((Product) r);  //casting from record(parent) to EmployeeUser
+        }
+        return hold.toArray(new Product[0]);
     }
+
     // method--->3 to get list of all purchasing operations in the file CustomersProducts.txt
     public CustomerProduct[] getListOfPurchasingOperations() throws IOException {
-       customerProductDatabase.readFromFile();
-        ArrayList<CustomerProduct> all = customerProductDatabase.returnAllRecords();
-        return all.toArray(new CustomerProduct[0]);
+        customerProductDatabase.readFromFile();
+        ArrayList<Record> all = customerProductDatabase.returnAllRecords();
+        CustomerProduct x[] = new CustomerProduct[all.size()];
+        for (int i = 0; i < x.length; i++) {
+            x[i] = (CustomerProduct) all.get(i);
+        }
+
+        return x;
 
     }
+
     // method--->4 to purchase a product
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) throws IOException {
         productsDatabase.readFromFile();
         customerProductDatabase.readFromFile();
 
-        Product prod = productsDatabase.getRecord(productID);
+        Product prod = (Product) productsDatabase.getRecord(productID);
         if (prod == null) {
             message("Error:", "Product not found!");
             return false;
@@ -85,9 +83,10 @@ public class EmployeeRole {
         message("Success:", "Purchase completed successfully!");
         return true;
     }
+
     // method--->5 to return a product
     public double returnProduct(String customerSSN, String productID,
-                                LocalDate purchaseDate, LocalDate returnDate) throws IOException {
+            LocalDate purchaseDate, LocalDate returnDate) throws IOException {
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -97,7 +96,7 @@ public class EmployeeRole {
         }
 
         productsDatabase.readFromFile();
-        Product prod = productsDatabase.getRecord(productID);
+        Product prod = (Product) productsDatabase.getRecord(productID);
         if (prod == null) {
             message("Error:", "Product not found!");
             return -1;
@@ -128,7 +127,8 @@ public class EmployeeRole {
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) throws IOException {
         customerProductDatabase.readFromFile();
 
-        for (CustomerProduct cp : customerProductDatabase.returnAllRecords()) {
+        for (Record r : customerProductDatabase.returnAllRecords()) {
+            CustomerProduct cp = (CustomerProduct) r;
             if (cp.getCustomerSSN().equals(customerSSN)
                     && cp.getPurchaseDate().equals(purchaseDate)) {
 
