@@ -49,6 +49,7 @@ public class EmployeeUserDatabase {
             records.add(employee);
         }
         scan.close();*/
+        //records.clear();
         File file = new File(filename+ ".txt");
         if (!file.exists()) {
             throw new IOException("File not found: " + filename);

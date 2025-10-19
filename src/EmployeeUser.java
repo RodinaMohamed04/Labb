@@ -55,12 +55,12 @@ public class EmployeeUser {
         this.address = address;
     }
     public String getPhoneNumber() {
-        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
-            throw new IllegalArgumentException("Invalid phone number");
-        }
         return phoneNumber;
     }
     public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
         this.phoneNumber = phoneNumber;
     }
 

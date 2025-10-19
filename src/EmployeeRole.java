@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeFormatter;
@@ -8,13 +9,20 @@ public class EmployeeRole {
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
 
-    public EmployeeRole() {
-        productsDatabase = new ProductDatabase("Products.txt");
-        customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
-        productsDatabase.readFromFile();
-        customerProductDatabase.readFromFile();
+    public EmployeeRole() throws IOException {
+        productsDatabase = new ProductDatabase("Products");
+        customerProductDatabase = new CustomerProductDatabase("CustomersProducts");
+        try {
+            productsDatabase.readFromFile();
+            customerProductDatabase.readFromFile();
+        } catch (Exception e) {
+            message("Error:", "Failed to read databases: " + e.getMessage());
+        }
+       // productsDatabase.readFromFile();
+       // customerProductDatabase.readFromFile();
     }
 
+    // method--->1  to add a new product in file products.txt
     public void addProduct(String productID, String productName, String manufacturerName,
                            String supplierName, int quantity) {
         if (productsDatabase.getRecord(productID) != null) {
@@ -22,25 +30,26 @@ public class EmployeeRole {
             return;
         }
 
-        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity);
+        Product p = new Product(productID, productName, manufacturerName, supplierName, quantity, 0.0F);
         productsDatabase.insertRecord(p);
         productsDatabase.saveToFile();
         message("Success:", "Product added successfully!");
     }
-
-    public Product[] getListOfProducts() {
+    // method--->2 to get list of all products in the file products.txt
+    public Product[] getListOfProducts() throws IOException {
         productsDatabase.readFromFile();
         ArrayList<Product> all = productsDatabase.returnAllRecords();
         return all.toArray(new Product[0]);
     }
-
-    public CustomerProduct[] getListOfPurchasingOperations() {
-        customerProductDatabase.readFromFile();
+    // method--->3 to get list of all purchasing operations in the file CustomersProducts.txt
+    public CustomerProduct[] getListOfPurchasingOperations() throws IOException {
+       customerProductDatabase.readFromFile();
         ArrayList<CustomerProduct> all = customerProductDatabase.returnAllRecords();
         return all.toArray(new CustomerProduct[0]);
-    }
 
-    public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
+    }
+    // method--->4 to purchase a product
+    public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) throws IOException {
         productsDatabase.readFromFile();
         customerProductDatabase.readFromFile();
 
@@ -65,9 +74,9 @@ public class EmployeeRole {
         message("Success:", "Purchase completed successfully!");
         return true;
     }
-
+    // method--->5 to return a product
     public double returnProduct(String customerSSN, String productID,
-                                LocalDate purchaseDate, LocalDate returnDate) {
+                                LocalDate purchaseDate, LocalDate returnDate) throws IOException {
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -105,7 +114,7 @@ public class EmployeeRole {
         return prod.getPrice();
     }
 
-    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
+    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) throws IOException {
         customerProductDatabase.readFromFile();
 
         for (CustomerProduct cp : customerProductDatabase.returnAllRecords()) {

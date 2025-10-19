@@ -14,7 +14,7 @@ public class ProductDatabase {
         this.records = new ArrayList<>();
         this.filename = filename;
     }
-
+    //method 1 ---> read product data from file and store in records
     public void readFromFile() throws IOException {
 
         File file = new File(filename + ".txt");
@@ -30,7 +30,7 @@ public class ProductDatabase {
         }
 
     }
-
+    //method to create Product object from a line in the file
     public Product createRecordFrom(String line) {
         String[] parts = line.split(",");
         if (parts.length != 6) {
@@ -40,11 +40,11 @@ public class ProductDatabase {
         float price = Float.parseFloat(parts[5]);
         return new Product(parts[0], parts[1], parts[2], parts[3], quantity, price);
     }
-
+    //method 3 ---> return all records
     public ArrayList<Product> returnAllRecords() {
         return new ArrayList<>(records);
     }
-
+    //method 4 ---> check if a record with the given key exists
     public boolean contains(String key) {
         for (Product product : records) {
             if (product.getSearchKey().equals(key)) {
@@ -53,7 +53,7 @@ public class ProductDatabase {
         }
         return false;
     }
-
+    //method 5 ---> get a record by key
     public Product getRecord(String key) {
         for (Product product : records) {
             if (product.getSearchKey().equals(key)) {
@@ -62,7 +62,7 @@ public class ProductDatabase {
         }
         return null;
     }
-
+    //method 6 ---> insert a new record
     public void insertRecord(Product record) {
         if (!contains(record.getSearchKey())) {
             records.add(record);
@@ -71,7 +71,7 @@ public class ProductDatabase {
             throw new IllegalArgumentException("Record with the same Employee ID already exists." + record.getSearchKey());
         }
     }
-
+    //method 7 ---> delete a record by key
     public void deleteRecord(String key) {
         Product remove = null;
         for (Product product : records) {
@@ -88,7 +88,7 @@ public class ProductDatabase {
         }
 
     }
-
+    //method 8 ---> save records to file
     public void saveToFile() {
 
         try (java.io.FileWriter fileWriter = new java.io.FileWriter(filename + ".txt")) {

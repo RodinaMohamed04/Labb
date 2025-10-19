@@ -27,6 +27,7 @@ public class AdminRole {
         EmployeeUser[] array = new EmployeeUser[list.size()];
         array = list.toArray(array); // convert ArrayList to array
         return array;
+
     }
 
     // method 3: remove employee using employee id
