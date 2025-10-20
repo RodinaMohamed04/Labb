@@ -1,5 +1,5 @@
-P2394,Laptop,Apple,TechSupplier,10,1500
-P8742,Smartphone,Samsung,MobileHub,25,800
-P1259,Headphones,Sony,SoundWave,50,120
-P4571,Monitor,LG,TechSupplier,15,900
-P3105,Keyboard,Logitech,AccessoryWorld,30,250
+P2394,Laptop,Apple,TechSupplier,10,1500.0
+P8742,Smartphone,Samsung,MobileHub,25,800.0
+P1259,Headphones,Sony,SoundWave,50,120.0
+P4571,Monitor,LG,TechSupplier,14,900.0
+P3105,Keyboard,Logitech,AccessoryWorld,30,250.0

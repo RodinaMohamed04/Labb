@@ -40,9 +40,9 @@ public class EmployeeUser implements Record {
     }
 
     public void setEmail(String email) {
-        if (!email.contains("@") || !email.contains(".")) {
+      //  if (!email.contains("@") || !email.contains(".")) {
 
-        }
+       // }
         this.email = email;
     }
 
@@ -59,9 +59,9 @@ public class EmployeeUser implements Record {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
+        //if (phoneNumber == null || !phoneNumber.matches("\\d{11}")) {
 
-        }
+       // }
         this.phoneNumber = phoneNumber.trim();
 
     }

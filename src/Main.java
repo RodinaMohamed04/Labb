@@ -39,7 +39,7 @@ public class Main {
                         System.out.println("Employees List :");
                         System.out.println("--------------------------------");
                         for (EmployeeUser emp : employees) {
-                            System.out.println(emp.getEmployeeId() + " " + emp.getName() + " " + emp.getEmail() + " " + emp.getAddress() + " " + emp.getPhoneNumber());
+                            System.out.println(emp.lineRepresentation());
                         }
                         break;
 
@@ -90,7 +90,7 @@ public class Main {
                             System.out.println("--------------------------------");
 
                             for (Product p : prod) {
-                                System.out.println(p.getProductID() + " " + p.getProductName() + " " + p.getManufacturerName() + " " + p.getSupplierName() + " " + p.getQuantity());
+                                System.out.println(p.lineRepresentation());
                             }
                             break;
 
@@ -100,7 +100,7 @@ public class Main {
                             System.out.println("List of Purchasing Operations :");
                             System.out.println("--------------------------------");
                             for (CustomerProduct c : purchases) {
-                                System.out.println(c.getCustomerSSN() + " " + c.getProductID() + " " + c.getPurchaseDate());
+                                System.out.println(c.lineRepresentation());
                             }
 
                             break;
